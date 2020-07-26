@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v4.2.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.2.0/dist/aframe-physics-system.js"></script>
+  <!-- <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script> -->
+
+  <style>
+    body {font-family:sans-serif;}
+  </style>
+</head>
+
+<body id="fullscreen-wrapper" onclick="startGame()">
+  <a-scene class="fullscreen" physics="gravity: -12.81" fog="type: linear; near: 2; far: 20; color: white">
+
+    <!-- Player -->
+    <a-entity id="rig" kinematic-body movement-controls position="0 0 0" rotation="0 250 0">
+      <a-entity id="camera" camera position="0 1.6 0" look-controls="pointerLockEnabled: true;" rotation="-30 40 0">
+        <a-entity cursor
+            position="0 0 -1"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat">
+        </a-entity>
+        <a-plane id="overlay" position="0 0 -.1" width=".35" height=".17" color="#fff" opacity=".8" shadow="cast: false; receive: false;" material="roughness: 1">
+          <a-entity text="value: test"></a-entity>
+        </a-plane>
+      </a-entity>
+    </a-entity>
+
+
+
+    <!-- light -->
+    <a-entity light="type: hemisphere; color: #FFF; groundColor: #000; intensity: 1.9"></a-entity>
+
+    <!-- floor -->
+    <a-plane rotation="-90 0 0" width="400" height="400" color="#465" shadow="cast: false; receive: false;" material="roughness: 1" static-body></a-plane>
+
+    <!-- sky -->
+    <a-sky color="#aabbcc"></a-sky>
+
+    <a-collada-model src="/assets/models/ammo-box.dae" position="-2.2 0 2.8" rotation="0 95 0">
+      <a-animation begin="click" attribute="position" from="-2.2 0 2.8"
+                     to="-2.2 5 2.8" dur="2000" fill="both"></a-animation>
+    </a-collada-model>
+
+    <a-collada-model id="suspicious-rock" src="/assets/models/rock.dae" position="-9 0 -4" rotation="0 0 0">
+      <a-animation begin="flip-rock" attribute="rotation" from="0 0 0"
+                     to="0 0 90" dur="2000" fill="both"></a-animation>
+    </a-collada-model>
+
+
+    <a-collada-model src="/assets/models/trees.dae" position="0 -1.375 0" static-body="shape:mesh"> </a-collada-model>
+    <a-collada-model src="/assets/models/logs-rocks-grass.dae" position="0 -1.375 0"> </a-collada-model>
+
+    <!-- <a-collada-model src="url(https://res.cloudinary.com/dauopf3r6/raw/upload/v1595642314/trees_jursnj.dae)" position="0 -1.375 0" static-body="shape:mesh"> </a-collada-model>
+    <a-collada-model src="url(https://res.cloudinary.com/dauopf3r6/raw/upload/v1595642308/logs-rocks-grass_famdbc.dae)" position="0 -1.375 0"> </a-collada-model> -->
+
+    <a-entity position="30 10 30" rotation="0 0 0">
+        <a-light color="orange" intensity=".4">
+        </a-light>
+    </a-entity>
+
+  </a-scene>
+
+  <!-- intro overlay -->
+  <div id="overlay-wrapper" style="width: 100%; height: 100%; position: fixed; left: 0; top: 0; overflow: hidden">
+    <div class="overlay-html" style="background-color: white; position: absolute; top:0; width:100%;height:100%; text-align:center; display:table; pointer-events: none" id="custombutton">
+      <div style="display: table-row">
+        <div style="display:table-cell; vertical-align:middle">
+          <h1 style="font-size: 3rem">Virtual Forest</h1>
+          <p>Controls: WASD to move. Mouse to look around. Click to interact with objects in the game.</p>
+          <p>Double-click anywhere on this page to begin.</p>
+        </div>
+      </div>
+      <div style="display: table-row; height: 10%">
+        <p style="display:table-cell; vertical-align:middle">You can exit the game at any time by clicking the Esc key (upper left of keyboard).</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+
+</body>
+
+</html>
