@@ -13,8 +13,6 @@
 <body id="fullscreen-wrapper" onclick="startGame()">
   <a-scene class="fullscreen" physics="gravity: -12.81" fog="type: linear; near: 2; far: 20; color: white" vr-mode-ui="enabled: false">
 
-
-
     <!-- light -->
     <a-entity light="type: hemisphere; color: #FFF; groundColor: #000; intensity: 1.9"></a-entity>
 
@@ -68,7 +66,7 @@
         <td style="display:table-cell; vertical-align:middle">
           <h1 style="font-size: 3rem">Virtual Forest</h1>
           <p>Controls: WASD to move. Mouse to look around. Click to interact with objects in the game.</p>
-          <p>Double-click anywhere on this page to begin.</p>
+          <p>Click anywhere on this page to begin.</p>
         </td>
       </tr>
       <tr style="height: 10%">
@@ -78,6 +76,9 @@
       </tr>
     </table>
     <p class="esc-reminder">Press ESC to exit</p>
+    <div class="compass-wrapper">
+      <img id="compass" src="/assets/images/compass.png">
+    </div>
   </div>
 
   <script src="game.js"></script>

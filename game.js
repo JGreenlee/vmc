@@ -2,15 +2,23 @@ gameStarted = false;
 
 var fullscreenWrapper = document.getElementById("fullscreen-wrapper");
 
-fullscreenWrapper.onmousedown = mouseDown;
+fullscreenWrapper.addEventListener('mousemove', e => {
+  var cam = document.getElementById("camera");
+  var rot = cam.getAttribute('rotation').y;
+  var compass = document.getElementById("compass");
+  compass.style.webkitTransform = 'rotate('+rot+'deg)';
+  compass.style.mozTransform    = 'rotate('+rot+'deg)';
+  compass.style.msTransform     = 'rotate('+rot+'deg)';
+  compass.style.oTransform      = 'rotate('+rot+'deg)';
+  compass.style.transform       = 'rotate('+rot+'deg)';
+});
 
-
-function mouseDown() {
+fullscreenWrapper.addEventListener('mousedown', e => {
   if(!gameStarted) {
     startGame();
     gameStarted = true;
   }
-}
+});
 
 function startGame() {
   openFullscreen();
