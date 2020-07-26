@@ -1,8 +1,9 @@
 gameStarted = false;
 
-document.onmousedown = startGame;
-
 var fullscreenWrapper = document.getElementById("fullscreen-wrapper");
+
+fullscreenWrapper.onmousedown = mouseDown;
+
 
 function mouseDown() {
   if(!gameStarted) {
@@ -12,15 +13,12 @@ function mouseDown() {
 }
 
 function startGame() {
-  console.log("ready");
-  // var vrbutton = document.getElementsByClassName("a-enter-vr-button")[0];
-  // var canvas = document.getElementsByTagName("UL")[0];
-  // console.log(vrbutton);
-  // vrbutton.click();
   openFullscreen();
 
-  overlay = document.querySelector("#overlay");
-  overlay.setAttribute("visible", "false");
+  overlay = document.getElementById("overlay-dialog");
+  overlay.style.display = "none";
+
+  gameStarted = true;
 }
 
 /* When the openFullscreen() function is executed, open the video in fullscreen.
