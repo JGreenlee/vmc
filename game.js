@@ -74,14 +74,14 @@ suspiciousRock.addEventListener('click', function (evt) {
   suspiciousRock.emit("flip-rock");
 });
 
-stages = [document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4")];
+stages = [document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4"), document.getElementById("s5"), document.getElementById("s6")];
 
 for(var i=0; i<6; i++) {
   stages[i].addEventListener('click', function(evt) {
     var distance = calcDistance(document.getElementById("rig"), this);
     console.log(distance);
-    if (distance<2.5) { // if player is withing 2.5 feet of the stage, show them the clue
-      showDialog("Congratulations! You have found stage "+(i+1)+"!", "Here's a piece of the final coordinates:<br>N 39 16._9_");
+    if (distance<3) { // if player is withing 2.5 feet of the stage, show them the clue
+      showDialog("Congratulations! You have found stage&nbsp;"+(i+1)+"!", "Here's a piece of the final coordinates:<br>N 39 16._9_");
     } else {
       showDialog("Almost...", "It's out of your reach. Try getting closer.");
     }

@@ -34,10 +34,12 @@ body {
   background-color: white;
   opacity: 80%;
   position: absolute;
-  top:0;
+  top: 0;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
   width:75%;
   height:80%;
-  margin: auto;
   text-align:center;
   position: relative;
   display: none;
