@@ -13,6 +13,23 @@ body {
   position: relative;
 }
 
+#overlay-intro {
+  background-color: white;
+  opacity: 90%;
+  position: absolute;
+  top:0;
+  width:100%;
+  height:100%;
+  margin: auto;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+}
+
+#overlay-intro td {
+  vertical-align: middle;
+}
+
 #overlay-dialog {
   background-color: white;
   opacity: 80%;
@@ -23,6 +40,11 @@ body {
   margin: auto;
   text-align:center;
   position: relative;
+  display: none;
+}
+
+#overlay-intro td {
+  vertical-align: middle;
 }
 
 .esc-reminder {
