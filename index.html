@@ -11,52 +11,60 @@
 </head>
 
 <body id="fullscreen-wrapper">
-  <a-scene class="fullscreen" physics="gravity: -12.81"
-    fog="type: linear; near: 2; far: 33; color: white"
-    vr-mode-ui="enabled: false">
+  <a-scene class="fullscreen" physics="gravity: -12.81" fog="type: linear; near: 2; far: 33; color: white" vr-mode-ui="enabled: false">
+
+    <a-assets>
+      <!-- local assets -->
+      <a-asset-item id="myforest-src" src="/assets/models/myforest.dae"> </a-asset-item>
+      <a-asset-item id="fire-src" src="/assets/models/fire.dae"> </a-asset-item>
+      <a-asset-item id="suspicious-rock-src" src="/assets/models/rock.dae"> </a-asset-item>
+      <a-asset-item id="s1-src" src="/assets/models/green-box.dae"> </a-asset-item>
+      <a-asset-item id="s2-src" src="/assets/models/orange-box.dae"> </a-asset-item>
+      <a-asset-item id="s3-src" src="/assets/models/film-can.dae"> </a-asset-item>
+      <a-asset-item id="s4-src" src="/assets/models/pill-bottle.dae"> </a-asset-item>
+      <a-asset-item id="nav-src" src="/assets/models/nav-mesh.glb"> </a-asset-item>
+
+      <!-- cloudinary assets -->
+
+    </a-assets>
 
     <!-- floor -->
-    <a-plane rotation="-90 0 0" width="400" height="400" color="#465" shadow="cast: false; receive: false;" material="roughness: 1"></a-plane>
+    <a-plane rotation="-90 0 0" width="400" height="400" color="#465" shadow="cast: false; receive: false;" material="roughness: 1"> </a-plane>
 
     <!-- sky -->
-    <a-sky color="#aabbcc"></a-sky>
+    <a-sky color="#abc"> </a-sky>
 
-    <a-collada-model id="suspicious-rock" class="clickable" src="/assets/models/rock.dae" position="-9 0 -4" rotation="0 0 0">
-      <a-animation begin="flip-rock" attribute="rotation" from="0 0 0"
-                     to="0 0 90" dur="1200" fill="both"></a-animation>
+    <!-- rocks, logs, trees -->
+    <a-collada-model src="#myforest-src" position="0 -1.3 0"> </a-collada-model>
+
+    <!-- interactable objects -->
+    <a-collada-model id="fire" class="clickable" src="#fire-src" position="0 -1.3 0"> </a-collada-model>
+    <a-collada-model id="suspicious-rock" class="clickable" src="#suspicious-rock-src" position="-9 0 -4" rotation="0 0 0">
+      <a-animation begin="flip-rock" attribute="rotation" from="0 0 0" to="0 0 90" dur="1200" fill="both"></a-animation>
     </a-collada-model>
 
-    <a-collada-model id="s1" class="clickable" src="/assets/models/green-box.dae" position="2.0543 0 6.57145" rotation="0 -15.29 0" collada-model="/assets/models/green-box.dae"></a-collada-model>
-    <a-collada-model id="s2" class="clickable" src="/assets/models/orange-box.dae" position="-12.58387 0.288 6.56141" rotation="-9.15 95 0" collada-model="/assets/models/orange-box.dae"></a-collada-model>
-    <a-collada-model id="s3" class="clickable" src="/assets/models/film-can.dae" position="-3.17533 5.78271 24.12923" rotation="0 0 -10" collada-model="/assets/models/film-can.dae"></a-collada-model>
-    <a-collada-model id="s4" class="clickable" src="/assets/models/pill-bottle.dae" position="-8.09278 0 -4.56909" rotation="0 0 90" collada-model="/assets/models/pill-bottle.dae"></a-collada-model>
-
-    <a-collada-model id="fire" class="clickable" src="/assets/models/fire.dae" position="0 -1.3 0"> </a-collada-model>
-    <a-collada-model src="/assets/models/myforest.dae" position="0 -1.3 0"> </a-collada-model>
-
-    <!-- <a-collada-model src="url(https://res.cloudinary.com/dauopf3r6/raw/upload/v1595642314/trees_jursnj.dae)" position="0 -1.375 0" static-body="shape:mesh"> </a-collada-model>
-    <a-collada-model src="url(https://res.cloudinary.com/dauopf3r6/raw/upload/v1595642308/logs-rocks-grass_famdbc.dae)" position="0 -1.375 0"> </a-collada-model> -->
+    <!-- stages of the cache -->
+    <a-collada-model id="s1" class="clickable" collada-model="#s1-src" position="2.0543 0 6.57145" rotation="0 -15.29 0"> </a-collada-model>
+    <a-collada-model id="s2" class="clickable" src="#s2-src" position="-12.58387 0.288 6.56141" rotation="-9.15 95 0"> </a-collada-model>
+    <a-collada-model id="s3" class="clickable" src="#s3-src" position="-3.17533 5.78271 24.12923" rotation="0 0 -10"> </a-collada-model>
+    <a-collada-model id="s4" class="clickable" src="#s4-src" position="-8.09278 0 -4.56909" rotation="0 0 90"> </a-collada-model>
 
     <!-- lights -->
     <a-entity light="type: hemisphere; color: #FFF; groundColor: #000; intensity: 1.5"></a-entity>
     <a-entity position="30 10 30" rotation="0 0 0">
-        <a-light color="orange" intensity=".4">
-        </a-light>
+        <a-light color="orange" intensity=".4"> </a-light>
     </a-entity>
     <a-entity position="-30 10 -30" rotation="0 0 0">
-        <a-light color="orange" intensity=".4">
-        </a-light>
+        <a-light color="orange" intensity=".4"> </a-light>
     </a-entity>
-    <a-entity gltf-model="/assets/models/nav-mesh.glb" position="0 -1.38 0" nav-mesh visible="false"></a-entity>
+    <a-entity gltf-model="#nav-src" position="0 -1.38 0" nav-mesh visible="false"> </a-entity>
 
     <!-- Player -->
     <a-entity id="rig" movement-controls="constrainToNavMesh: true" position="-5.345 -0.57 3.179" rotation="0 270 0">
       <a-entity id="camera" camera position="0 1.6 0" look-controls="pointerLockEnabled: true;" rotation="-90 40 0">
-        <a-entity cursor raycaster="objects: .clickable" position="0 0 -0.1" geometry="primitive: ring; radiusInner: 0.0015; radiusOuter: 0.0025" material="color: black; shader: flat">
-        </a-entity>
+        <a-entity cursor raycaster="objects: .clickable" position="0 0 -0.1" geometry="primitive: ring; radiusInner: 0.0015; radiusOuter: 0.0025" material="color: black; shader: flat"> </a-entity>
       </a-entity>
     </a-entity>
-
 
   </a-scene>
 
