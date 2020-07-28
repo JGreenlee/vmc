@@ -1,3 +1,19 @@
+
+
+<!--
+
+    Virtual Multi by Jack_of_Hearts
+      Difficulty: 2.5/5
+      Terrain: 1
+
+    Stage 0 [optional]: N 39 01.234 W 084 56.789
+
+-->
+
+
+
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html>
 
@@ -11,21 +27,32 @@
 </head>
 
 <body id="fullscreen-wrapper">
-  <a-scene class="fullscreen" physics="gravity: -12.81" fog="type: linear; near: 2; far: 33; color: #ddd" vr-mode-ui="enabled: false">
+  <a-scene id="scene" class="fullscreen" physics="gravity: -12.81" fog="type: linear; near: 2; far: 33; color: #ddd" vr-mode-ui="enabled: false">
 
     <a-assets>
+
       <!-- local assets -->
-      <a-asset-item id="myforest-src" src="/assets/models/myforest.dae"> </a-asset-item>
+
+      <!-- <a-asset-item id="myforest-src" src="/assets/models/myforest.dae"> </a-asset-item>
       <a-asset-item id="fire-src" src="/assets/models/fire.dae"> </a-asset-item>
       <a-asset-item id="suspicious-rock-src" src="/assets/models/suspicious-rock.dae"> </a-asset-item>
       <a-asset-item id="s1-src" src="/assets/models/green-box.dae"> </a-asset-item>
       <a-asset-item id="s2-src" src="/assets/models/blue-box.dae"> </a-asset-item>
       <a-asset-item id="s3-src" src="/assets/models/pill-bottle.dae"> </a-asset-item>
       <a-asset-item id="s4-src" src="/assets/models/film-can.dae"> </a-asset-item>
-      <a-asset-item id="nav-src" src="/assets/models/nav-mesh.gltf"> </a-asset-item>
+      <a-asset-item id="nav-src" src="/assets/models/nav-mesh.glb"> </a-asset-item> -->
 
       <!-- cloudinary assets -->
       <!-- don't forget to change compass.png to cloudinary -->
+
+      <a-asset-item id="myforest-src" src="https://res.cloudinary.com/dauopf3r6/raw/upload/v1595908799/virtual-multi/myforest_upcdhr.dae"> </a-asset-item>
+      <a-asset-item id="fire-src" src="https://res.cloudinary.com/dauopf3r6/raw/upload/v1595908798/virtual-multi/fire_eccpkv.dae"> </a-asset-item>
+      <a-asset-item id="suspicious-rock-src" src="https://res.cloudinary.com/dauopf3r6/raw/upload/v1595954474/virtual-multi/suspicious-rock_neflbv.dae"> </a-asset-item>
+      <a-asset-item id="s1-src" src="https://res.cloudinary.com/dauopf3r6/raw/upload/v1595908798/virtual-multi/green-box_wxu3lt.dae"> </a-asset-item>
+      <a-asset-item id="s2-src" src="https://res.cloudinary.com/dauopf3r6/raw/upload/v1595908798/virtual-multi/blue-box_h9zbam.dae"> </a-asset-item>
+      <a-asset-item id="s3-src" src="https://res.cloudinary.com/dauopf3r6/raw/upload/v1595908798/virtual-multi/pill-bottle_dfufiv.dae"> </a-asset-item>
+      <a-asset-item id="s4-src" src="https://res.cloudinary.com/dauopf3r6/raw/upload/v1595908798/virtual-multi/film-can_qcy7pr.dae"> </a-asset-item>
+      <a-asset-item id="nav-src" src="https://res.cloudinary.com/dauopf3r6/raw/upload/v1595909522/virtual-multi/nav-mesh_uozpdw.dae"> </a-asset-item>
 
     </a-assets>
 
@@ -77,7 +104,7 @@
         <td>
           <h1 style="font-size: 3rem">Virtual Forest</h1>
           <p>Controls: WASD to move. Mouse to look around. Click to interact with objects in the game.</p>
-          <p>Click anywhere on this page to begin.</p>
+          <p>Double-click anywhere on this page to begin.</p>
         </td>
       </tr>
       <tr style="height: 10%">
@@ -101,7 +128,13 @@
     </table>
     <p class="esc-reminder">Press ESC to exit</p>
     <div class="compass-wrapper">
-      <img id="compass" src="/assets/images/compass.png">
+      <!-- <img id="compass" src="/assets/images/compass.png"> -->
+      <img id="compass" src="https://res.cloudinary.com/dauopf3r6/image/upload/v1595909590/virtual-multi/compass_mjw7w5.png">
+    </div>
+    <div id="loader-wrapper">
+      <div class="loader">
+        <div class="spinner"></div>
+      </div>
     </div>
   </div>
 
