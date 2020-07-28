@@ -6,48 +6,15 @@
 gameStarted = false;
 dialogIsShowing = true;
 tooFarDialogShown = false;
+justFoundStage = false;
 
 var fullscreenWrapper = document.getElementById("fullscreen-wrapper");
 var overlayDialog = document.getElementById("overlay-dialog");
 
-// update compass rotation based on camera's rotation on Y axis
-fullscreenWrapper.addEventListener('mousemove', e => {
-  var cam = document.getElementById("camera");
-  var compass = document.getElementById("compass");
-  var rot = cam.getAttribute('rotation').y;
+var suspiciousRock = document.getElementById("suspicious-rock");
+var suspiciousRockFlipped = false;
+var fire = document.getElementById("fire");
 
-  compass.style.transform = 'rotate(' + rot + 'deg)';
-  compass.style.webkitTransform = 'rotate(' + rot + 'deg)';
-  compass.style.mozTransform = 'rotate(' + rot + 'deg)';
-  compass.style.msTransform = 'rotate(' + rot + 'deg)';
-  compass.style.oTransform = 'rotate(' + rot + 'deg)';
-});
-
-fullscreenWrapper.addEventListener('mousedown', e => {
-  if(!isFullscreen()) {
-    openFullscreen();
-  }
-  if(!gameStarted) {
-    document.getElementById("overlay-intro").style.display = "none";
-    gameStarted = true;
-  }
-  if (dialogIsShowing) {
-    overlayDialog.style.display = "none";
-    setTimeout(function() {
-      dialogIsShowing = false;
-    }, 100);
-  }
-});
-
-fullscreenWrapper.addEventListener('keypress', e => {
-  var dist = calcDistance(document.getElementById("rig"), 0);
-  if (dist > 25 && !tooFarDialogShown) {
-    showDialog("Hmmm...", "It's probably best not to stray too far from the fire. You don't want to get lost in this fog!");
-    tooFarDialogShown = true;
-  } else if (dist < 23) {
-    tooFarDialogShown = false;
-  }
-});
 
 function openFullscreen() {
   if (fullscreenWrapper.requestFullscreen) {
@@ -94,34 +61,83 @@ function getCoords(stageFound) {
   return "<span class=\"coords\">" +
         "N 39 18."+
           (stageFound==1 ? "<b>1</b>" : "_") +
-          (stageFound==2 ? "<b>2</b>" : "_") +
-          (stageFound==3 ? "<b>3</b>" : "_") +
+          (stageFound==3 ? "<b>23</b>" : "__") +
           " W 084 18."+
-          (stageFound==4 ? "<b>4</b>" : "_") +
-          (stageFound==5 ? "<b>5</b>" : "_") +
-          (stageFound==6 ? "<b>6</b>" : "_") +
+          (stageFound==2 ? "<b>4</b>" : "_") +
+          (stageFound==4 ? "<b>56</b>" : "__") +
         "</span>";
 }
 
-var suspiciousRock = document.getElementById("suspicious-rock");
 suspiciousRock.addEventListener('click', function (evt) {
-  suspiciousRock.emit("flip-rock");
+  if (!suspiciousRockFlipped) {
+    suspiciousRock.emit("flip-rock");
+    suspiciousRockFlipped = true;
+  } else {
+    suspiciousRock.emit("flip-back");
+    suspiciousRockFlipped = false;
+  }
 });
 
-var fire = document.getElementById("fire");
 fire.addEventListener('click', function (evt) {
   showDialog("Ahhhhhh...", "It feels nice and warm by the fire.");
 });
 
-stages = [document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4"), document.getElementById("s5"), document.getElementById("s6")];
+// update compass rotation based on camera's rotation on Y axis
+fullscreenWrapper.addEventListener('mousemove', e => {
+  var cam = document.getElementById("camera");
+  var compass = document.getElementById("compass");
+  var rot = cam.getAttribute('rotation').y;
 
-for(var i=0; i<6; i++) {
+  compass.style.transform = 'rotate(' + rot + 'deg)';
+  compass.style.webkitTransform = 'rotate(' + rot + 'deg)';
+  compass.style.mozTransform = 'rotate(' + rot + 'deg)';
+  compass.style.msTransform = 'rotate(' + rot + 'deg)';
+  compass.style.oTransform = 'rotate(' + rot + 'deg)';
+});
+
+fullscreenWrapper.addEventListener('mousedown', e => {
+  if(!isFullscreen()) {
+    openFullscreen();
+  }
+  if(!gameStarted) {
+    document.getElementById("overlay-intro").style.display = "none";
+    gameStarted = true;
+  }
+  if (dialogIsShowing) {
+    overlayDialog.style.display = "none";
+    if (justFoundStage) {
+      if (suspiciousRockFlipped) {
+        suspiciousRock.emit("flip-back");
+        suspiciousRockFlipped = false;
+      }
+      justFoundStage = false;
+    }
+    setTimeout(function() {
+      dialogIsShowing = false;
+    }, 100);
+  }
+});
+
+fullscreenWrapper.addEventListener('keypress', e => {
+  var dist = calcDistance(document.getElementById("rig"), 0);
+  if (dist > 25 && !tooFarDialogShown) {
+    showDialog("Hmmm...", "It's probably best not to stray too far from the fire. You don't want to get lost in this fog!");
+    tooFarDialogShown = true;
+  } else if (dist < 23) {
+    tooFarDialogShown = false;
+  }
+});
+
+stages = [document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4")];
+
+for(var i=0; i<4; i++) {
   stages[i].addEventListener('click', function(evt) {
     var distance = calcDistance(document.getElementById("rig"), this);
     console.log(distance);
     if (distance<3) { // if player is withing 2.5 feet of the stage, show them the clue
       stageFound = parseInt(this.id.substring(1));
       showDialog("Congratulations!", "<span>You have found stage&nbsp;"+stageFound+"!</span><br><br>Here's a piece of the final coordinates:<br>"+getCoords(stageFound));
+      justFoundStage = true;
     } else {
       showDialog("Almost...", "It's out of your reach. Try getting closer.");
     }

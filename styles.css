@@ -62,6 +62,7 @@ body {
   padding-right: 25px;
   width:75%;
   height:80%;
+  border-radius: 20px;
   text-align:center;
   position: relative;
   display: none;
