@@ -5,6 +5,7 @@
 
 gameStarted = false;
 dialogIsShowing = true;
+tooFarDialogShown = false;
 
 var fullscreenWrapper = document.getElementById("fullscreen-wrapper");
 var overlayDialog = document.getElementById("overlay-dialog");
@@ -32,7 +33,19 @@ fullscreenWrapper.addEventListener('mousedown', e => {
   }
   if (dialogIsShowing) {
     overlayDialog.style.display = "none";
-    dialogIsShowing = false;
+    setTimeout(function() {
+      dialogIsShowing = false;
+    }, 100);
+  }
+});
+
+fullscreenWrapper.addEventListener('keypress', e => {
+  var dist = calcDistance(document.getElementById("rig"), 0);
+  if (dist > 25 && !tooFarDialogShown) {
+    showDialog("Hmmm...", "It's probably best not to stray too far from the fire. You don't want to get lost in this fog!");
+    tooFarDialogShown = true;
+  } else if (dist < 23) {
+    tooFarDialogShown = false;
   }
 });
 
@@ -53,25 +66,51 @@ function isFullscreen(){
 }
 
 function showDialog(title, text) {
-  document.getElementById("dialog-title").innerHTML = title;
-  document.getElementById("dialog-text").innerHTML = text;
+  if (!dialogIsShowing) {
+    document.getElementById("dialog-title").innerHTML = title;
+    document.getElementById("dialog-text").innerHTML = text;
 
-  overlayDialog.style.display = "table";
-  dialogIsShowing = true;
+    overlayDialog.style.display = "table";
+    dialogIsShowing = true;
+  }
 }
 
 function calcDistance(elem1, elem2) {
   e1Pos = elem1.getAttribute("position");
-  e2Pos = elem2.getAttribute("position");
-  var a = e1Pos.x - e2Pos.x;
-  var b = e1Pos.y - e2Pos.y;
-  var c = e1Pos.z - e2Pos.z;
+  if (typeof elem2 == "number") {
+    var a = e1Pos.x + 2.75;
+    var b = e1Pos.y;
+    var c = e1Pos.z - 4.5;
+  } else {
+    e2Pos = elem2.getAttribute("position");
+    var a = e1Pos.x - e2Pos.x;
+    var b = e1Pos.y - e2Pos.y;
+    var c = e1Pos.z - e2Pos.z;
+  }
   return Math.sqrt(a*a + b*b + c*c);
+}
+
+function getCoords(stageFound) {
+  return "<span class=\"coords\">" +
+        "N 39 18."+
+          (stageFound==1 ? "<b>1</b>" : "_") +
+          (stageFound==2 ? "<b>2</b>" : "_") +
+          (stageFound==3 ? "<b>3</b>" : "_") +
+          " W 084 18."+
+          (stageFound==4 ? "<b>4</b>" : "_") +
+          (stageFound==5 ? "<b>5</b>" : "_") +
+          (stageFound==6 ? "<b>6</b>" : "_") +
+        "</span>";
 }
 
 var suspiciousRock = document.getElementById("suspicious-rock");
 suspiciousRock.addEventListener('click', function (evt) {
   suspiciousRock.emit("flip-rock");
+});
+
+var fire = document.getElementById("fire");
+fire.addEventListener('click', function (evt) {
+  showDialog("Ahhhhhh...", "It feels nice and warm by the fire.");
 });
 
 stages = [document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4"), document.getElementById("s5"), document.getElementById("s6")];
@@ -81,7 +120,8 @@ for(var i=0; i<6; i++) {
     var distance = calcDistance(document.getElementById("rig"), this);
     console.log(distance);
     if (distance<3) { // if player is withing 2.5 feet of the stage, show them the clue
-      showDialog("Congratulations! You have found stage&nbsp;"+(i+1)+"!", "Here's a piece of the final coordinates:<br>N 39 16._9_");
+      stageFound = parseInt(this.id.substring(1));
+      showDialog("Congratulations!", "<span>You have found stage&nbsp;"+stageFound+"!</span><br><br>Here's a piece of the final coordinates:<br>"+getCoords(stageFound));
     } else {
       showDialog("Almost...", "It's out of your reach. Try getting closer.");
     }

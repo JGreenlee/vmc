@@ -13,6 +13,28 @@ body {
   position: relative;
 }
 
+#overlay-intro h1, #overlay-dialog h1 {
+  font-size: 3rem;
+}
+
+#overlay-dialog span {
+  font-size: 1.4rem;
+}
+
+#overlay-dialog p {
+  font-size: 1.2rem;
+}
+
+#overlay-dialog .coords {
+  font-family: monospace;
+  letter-spacing: 2px;
+  font-size: 1.4rem;
+}
+
+#overlay-dialog .coords b {
+  font-size: 1.8rem;
+}
+
 #overlay-intro {
   background-color: white;
   opacity: 90%;
