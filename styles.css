@@ -1,14 +1,3 @@
-
-
-
-
-    /* It looks like you have stumbled across my code! You may view it here if you wish.
-    If you are expecting to find hints, you will not find any secret messages embedded in the code, or anything of the sort. */
-
-
-
-
-
 /* styles.css */
 
 body {
@@ -31,8 +20,8 @@ body {
 }
 
 .spinner {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 16px solid #ddd;
+  border-top: 16px solid #39d;
   border-radius: 50%;
   width: 120px;
   height: 120px;
