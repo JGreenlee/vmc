@@ -1,5 +1,5 @@
 # VMC - Virtual Multi Cache
-A simple virtual forest created in [A-Frame](https://aframe.io/) with 4 hidden treasures that each serve as a virtual stage of a multi geocache.
+A simple virtual forest created in [A-Frame](https://aframe.io/) with 4 hidden treasures that each serve as a virtual stage of a multi geocache. It is [live on Codepen.](https://codepen.io/jackofhearts/full/abdMMYG)
 
 Despite being created using a VR framework, the forest is not intended to be viewed in VR mode; only from a laptop or PC.
 Controls configuration is Minecraft style.
