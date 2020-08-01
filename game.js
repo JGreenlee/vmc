@@ -60,14 +60,13 @@ function calcDistance(elem1, elem2) {
 
 function getCoords(stageFound) {
   return  "<span class=\"coords\">" +
-            "N 39 01." +
-            (stageFound==1 || stageFound==0 ? "<b>2</b>" : "_") +
-            (stageFound==3 || stageFound==0 ? "<b>34</b>" : "__") +
-            " W 084 56."+
-            (stageFound==2 || stageFound==0  ? "<b>7</b>" : "_") +
-            (stageFound==4 || stageFound==0  ? "<b>89</b>" : "__") +
+            "N 39 XX." +
+            (stageFound==1 || stageFound==0 ? "<b>x</b>" : "_") +
+            (stageFound==3 || stageFound==0 ? "<b>xx</b>" : "__") +
+            " W 084 XX."+
+            (stageFound==2 || stageFound==0  ? "<b>x</b>" : "_") +
+            (stageFound==4 || stageFound==0  ? "<b>xx</b>" : "__") +
           "</span>";
-
 }
 
 function loaded() {
@@ -117,6 +116,13 @@ fullscreenWrapper.addEventListener('click', e => {
     }
     if(!gameStarted) {
       document.getElementById("overlay-intro").style.display = "none";
+      var fireSound = document.querySelector('[sound]');
+      console.log(fireSound);
+      if (fireSound.components.sound) {
+        fireSound.components.sound.playSound();
+      } else {
+        console.log("fire sound not found");
+      }
       gameStarted = true;
     }
     if (dialogIsShowing) {
