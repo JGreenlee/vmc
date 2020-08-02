@@ -70,7 +70,6 @@ function getCoords(stageFound) {
 }
 
 function loaded() {
-  console.log("loaded");
   document.getElementById("loader-wrapper").style.display = "none";
 }
 
@@ -117,11 +116,8 @@ fullscreenWrapper.addEventListener('click', e => {
     if(!gameStarted) {
       document.getElementById("overlay-intro").style.display = "none";
       var fireSound = document.querySelector('[sound]');
-      console.log(fireSound);
       if (fireSound.components.sound) {
         fireSound.components.sound.playSound();
-      } else {
-        console.log("fire sound not found");
       }
       gameStarted = true;
     }
@@ -160,8 +156,7 @@ stages = [document.getElementById("s1"), document.getElementById("s2"), document
 for(var i=0; i<4; i++) {
   stages[i].addEventListener('click', function(evt) {
     var distance = calcDistance(document.getElementById("rig"), this);
-    console.log(distance);
-    if (distance<3) { // if player is withing 2.5 feet of the stage, show them a clue
+    if (distance<3) { // if player is withing 3 feet of the stage, show them a clue
 
       stageFound = parseInt(this.id.substring(1));
       justFoundStage = true;
