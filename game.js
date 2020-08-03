@@ -164,7 +164,7 @@ for(var i=0; i<4; i++) {
 
       const hasBeenFound = (stageHasBeenFound) => stageHasBeenFound == true;
       if (foundStages.every(hasBeenFound)) {
-          showDialog("Congratulations!", "<span>You have found stage&nbsp;"+stageFound+"!</span><br><br><span>You have found all the stages!</span><br><br>Here are the final coordinates:<br>"+getCoords(0));
+        showDialog("Congratulations!", "<span>You have found stage&nbsp;"+stageFound+"!</span><br><br><span>You have found all the stages!</span><br><br>Here are the final coordinates:<br>"+getCoords(0)+"<br><br><span style='font-family: monospace'>[FINAL]<br>ZNTARGVP EVTUG FVQR</span>");
       } else {
         showDialog("Congratulations!", "<span>You have found stage&nbsp;"+stageFound+"!</span><br><br>Here's a piece of the final coordinates:<br>"+getCoords(stageFound));
       }
