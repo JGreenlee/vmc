@@ -1,4 +1,4 @@
-/* styles.css */
+/* vmc-core-styles.css */
 
 body {
   font-family:sans-serif;
@@ -120,20 +120,4 @@ body {
   background-color: #ddeedd;
   opacity: .8;
   border-radius: 12px 0 0 0;
-}
-
-.compass-wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 7px 7px 3px 10px;
-  background-color: #ddeedd;
-  border-radius: 0 0 0 50%;
-  opacity: .8;
-  width: 9rem;
-}
-
-#compass {
-  transform: rotate(0);
-  width: 100%;
 }

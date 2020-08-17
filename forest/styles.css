@@ -1,0 +1,19 @@
+/*
+  styles.css | VMC #1 - Forest
+*/
+
+.compass-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 7px 7px 3px 10px;
+  background-color: #ddeedd;
+  border-radius: 0 0 0 50%;
+  opacity: .8;
+  width: 9rem;
+}
+
+#compass {
+  transform: rotate(0);
+  width: 100%;
+}
